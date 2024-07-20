@@ -24,7 +24,7 @@ const reviewsRoutes = require('./routes/reviews');
 
 const MongoDBStore = require('connect-mongo')(session); // it is used to store the session in the database so that the session is not lost when the server is restarted
 
-const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/yelp-camp'; // it will check if the environment is production then it will use the db url from the environment otherwise it will use the local db url
+const dbUrl = process.env.DB_URL  // it will check if the environment is production then it will use the db url from the environment otherwise it will use the local db url
 mongoose.connect(dbUrl);
 
 const db = mongoose.connection;
@@ -88,7 +88,7 @@ app.use(
 );
 
 const store = new MongoDBStore({ // it is used to store the session in the database so that the session is not lost when the server is restarted
-    url: 'mongodb://localhost:27017/yelp-camp',
+    url: dbUrl, // it is the url of the database where the session will be stored
     secret : 'thisshouldbesecret',
     touchAfter : 24 * 60 * 60 // it will update the session after 24 hours
     });
